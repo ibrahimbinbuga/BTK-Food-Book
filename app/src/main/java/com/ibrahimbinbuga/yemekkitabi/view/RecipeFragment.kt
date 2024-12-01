@@ -1,4 +1,4 @@
-package com.ibrahimbinbuga.yemekkitabi
+package com.ibrahimbinbuga.yemekkitabi.view
 
 import android.Manifest
 import android.content.Intent
@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
-import com.ibrahimbinbuga.yemekkitabi.databinding.FragmentListBinding
 import com.ibrahimbinbuga.yemekkitabi.databinding.FragmentRecipeBinding
 
 

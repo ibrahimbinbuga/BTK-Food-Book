@@ -1,4 +1,4 @@
-package com.ibrahimbinbuga.yemekkitabi
+package com.ibrahimbinbuga.yemekkitabi.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

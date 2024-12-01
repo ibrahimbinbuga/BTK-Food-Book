@@ -21,6 +21,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.ibrahimbinbuga.yemekkitabi.databinding.FragmentRecipeBinding
+import com.ibrahimbinbuga.yemekkitabi.model.Recipe
+import java.io.ByteArrayOutputStream
 
 
 class RecipeFragment : Fragment() {
@@ -72,7 +74,20 @@ class RecipeFragment : Fragment() {
         }
     }
 
-    fun save(view: View){}
+    fun save(view: View){
+        val name = binding.nameText.text.toString()
+        val ingredients = binding.ingredientsText.text.toString()
+
+        if (selectedBitmap != null){
+            val smallBitmap = smallBitmapCreate(selectedBitmap!!,300)
+            val outputStream = ByteArrayOutputStream()
+            smallBitmap.compress(Bitmap.CompressFormat.PNG,50,outputStream)
+            val byteArray = outputStream.toByteArray()
+
+            val recipe = Recipe(name,ingredients,byteArray)
+
+        }
+    }
     fun delete(view: View){}
     fun selectImage(view: View){
 
@@ -115,6 +130,26 @@ class RecipeFragment : Fragment() {
                 activityResultLauncher.launch(intentToGallery)
             }
         }
+    }
+
+    private fun smallBitmapCreate(selectedBitmapFromUser : Bitmap, maxSize : Int): Bitmap{
+        var width = selectedBitmapFromUser.width
+        var height = selectedBitmapFromUser.height
+
+        val bitmapRate : Double = width.toDouble() / height.toDouble()
+
+        if(bitmapRate >= 1){
+            //görsel yatay
+            width = maxSize
+            val scaledHeight = width / bitmapRate
+            height = scaledHeight.toInt()
+        }else {
+            //görsel dikey
+            height = maxSize
+            val scaledWidth = height * bitmapRate
+            width = scaledWidth.toInt()
+        }
+        return Bitmap.createScaledBitmap(selectedBitmapFromUser,width,height,true)
     }
 
     override fun onDestroyView() {
